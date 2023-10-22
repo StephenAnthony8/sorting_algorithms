@@ -13,9 +13,8 @@ void insertion_sort_list(listint_t **list)
 
 	/* s_val = start->n; */
 
-	if (start)
-		if (!start->next)
-			return;
+	if (!start || !start->next)
+		return;
 	while (start->next)
 	{
 		tmp = start->next;
