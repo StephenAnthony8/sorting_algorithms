@@ -5,7 +5,7 @@ a.out
 yeet
 
 # main files 
-main.c
+*main.c
 
 # test file
 test.c
