@@ -29,7 +29,7 @@ void counting_sort(int *array, size_t size)
 {
 	int max, i, element;
 	int *counting_array, *sorted_array;
-	
+
 	if (array == NULL || size < 2)
 		return;
 	max = max_int(array, size);
