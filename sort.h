@@ -40,5 +40,6 @@ int swap_node_reverse(listint_t *list);
 int swap_node_forward(listint_t *list);
 
 void counting_sort(int *array, size_t size);
+int max_int(int *array, int size);
 
 #endif /* SORT_H */
