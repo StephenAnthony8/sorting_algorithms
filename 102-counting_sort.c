@@ -20,7 +20,7 @@ void counting_sort(int *array, size_t size)
 
 	/* finds max value in the array */
 	max = array[0];
-	for (i = 1; i < size; i++)
+	for (i = 0; i < size; i++)
 	{
 		if (array[i] < 0)
 			return;
@@ -31,36 +31,32 @@ void counting_sort(int *array, size_t size)
 	counting_array = malloc((max + 1) * sizeof(int));
 	if (!counting_array)
 	{
-		free(counting_array);
 		return;
 	}
 
-	for (j = 0; j <= max; j++)
+	for (j = 0; j < (max + 1); j++)
 		counting_array[j] = 0;
 
 	/* counts occurrence of each element in the input array */
 	for (i = 0; i < size; i++)
-		counting_array[array[i]]++;
+		counting_array[array[i]] += 1;
 	/* updates counting array with cumulative counts */
-	for (j = 1; j <= max; j++)
+	for (j = 0; j < (max + 1); j++)
 		counting_array[j] += counting_array[j - 1];
 	/* creates a new sorted array using counting array */
 	sorted_array = malloc(size * sizeof(int));
 	if (!sorted_array)
 	{
 		free(counting_array);
-		free(sorted_array);
 		return;
 	}
 	for (k = size - 1; k >= 0; k--)
 	{
 		element = array[k];
-		counting_array[element]--;
-		sorted_array[counting_array[element]] = element;
+		sorted_array[counting_array[element - 1]] = element;
+		counting_array[element] -= 1;
 	}
 	/* copy sorted array back to the original array */
-	for (i = 0; i < size; i++)
-		array[i] = sorted_array[i];
 	for (i = 0; i < size; i++)
 		array[i] = sorted_array[i];
 	print_counting_array(counting_array, max + 1);
