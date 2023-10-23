@@ -16,7 +16,7 @@ void cocktail_sort_list(listint_t **list)
 	{
 		if (start->next != end_p)
 		{
-			if (start->n < start->next->n)
+			if (start->n <= start->next->n)
 				start = start->next;
 			else/* increasing switch function */
 			{
@@ -29,7 +29,7 @@ void cocktail_sort_list(listint_t **list)
 			end_p = (end_p ? end_p->prev : start);
 			while (start->prev && start != start_p)
 			{
-				if (start->n > start->prev->n)
+				if (start->n >= start->prev->n)
 					start = start->prev;
 				else/* decreasing switch function */
 				{
