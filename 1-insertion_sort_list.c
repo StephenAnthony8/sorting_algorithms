@@ -8,13 +8,13 @@ void insertion_sort_list(listint_t **list)
 	listint_t *start, *tmp, *prev_n;
 
 	tmp = NULL;
-	start = *list;
 	/* rev = NULL; */
 
 	/* s_val = start->n; */
 
 	if (!list || !*list || !(*list)->next)
 		return;
+	start = *list;
 	while (start->next)
 	{
 		tmp = start->next;
