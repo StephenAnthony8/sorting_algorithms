@@ -40,7 +40,6 @@ void counting_sort(int *array, size_t size)
 		counting_array[array[i]]++;
 	/* updates counting array with cumulative counts */
 	for (j = 1; j <= max; j++)
-		uiqsa
 		counting_array[j] += counting_array[j - 1];
 	/* creates a new sorted array using counting array */
 	sorted_array = malloc(size * sizeof(int));
