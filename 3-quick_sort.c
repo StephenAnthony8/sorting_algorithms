@@ -56,12 +56,14 @@ int lomuto_partition(int array[], int low, int high, size_t size)
 		{
 			i++;
 			swap(&array[i], &array[j]);
-			print_array(array, size);
+			if (i != j)
+				print_array(array, size);
 		}
 	}
 	/* swap the pivot element with element at (i + 1) */
 	swap(&array[i + 1], &array[high]);
-	print_array(array, size);
+	if ((i + 1) != high)
+		print_array(array, size);
 
 	/* return the position of the pivot element */
 	return (i + 1);
