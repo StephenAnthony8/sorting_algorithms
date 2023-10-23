@@ -1,7 +1,5 @@
 #include "sort.h"
 
-void print_counting_array(int *counting_array, int size);
-
 /**
  * counting_sort - sorts an array of ints using
  * counting sort
@@ -10,78 +8,44 @@ void print_counting_array(int *counting_array, int size);
  */
 void counting_sort(int *array, size_t size)
 {
-	int max, j, element;
+	int max, i, element;
 	int *counting_array, *sorted_array;
-	size_t i;
-	ssize_t k;
+	size_t j;
 
 	if (array == NULL || size < 2)
 		return;
 
-	/* finds max value in the array */
 	max = array[0];
-	for (i = 0; i < size; i++)
+	for (j = 0; j < size; j++)
 	{
-		if (array[i] < 0)
-			return;
-		if (array[i] > max)
-			max = array[i];
+		if (array[j] > max)
+			max = array[j];
 	}
-	/* creates & initializes counting array */
 	counting_array = malloc((max + 1) * sizeof(int));
 	if (!counting_array)
-	{
 		return;
-	}
+	for (i = 0; i < (max + 1); i++)
+		counting_array[i] = 0;
 
-	for (j = 0; j < (max + 1); j++)
-		counting_array[j] = 0;
-
-	/* counts occurrence of each element in the input array */
-	for (i = 0; i < size; i++)
+	for (i = 0; i < (int)size; i++)
 		counting_array[array[i]] += 1;
-	/* updates counting array with cumulative counts */
-	for (j = 0; j < (max + 1); j++)
-		counting_array[j] += counting_array[j - 1];
-	/* creates a new sorted array using counting array */
+	for (i = 0; i < (max + 1); i++)
+		counting_array[i] += counting_array[i - 1];
+	print_array(counting_array, max + 1);
 	sorted_array = malloc(size * sizeof(int));
 	if (!sorted_array)
 	{
 		free(counting_array);
 		return;
 	}
-	for (k = size - 1; k >= 0; k--)
+	for (i = 0; i < (int)size; i++)
 	{
-		element = array[k];
+		element = array[i];
 		sorted_array[counting_array[element - 1]] = element;
 		counting_array[element] -= 1;
 	}
-	/* copy sorted array back to the original array */
-	for (i = 0; i < size; i++)
+	for (i = 0; i < (int)size; i++)
 		array[i] = sorted_array[i];
-	print_counting_array(counting_array, max + 1);
-
 	free(counting_array);
 	free(sorted_array);
-}
-
-/**
- * print_counting_array - Prints the counting array
- * @counting_array: The counting array to be printed
- * @size: The size of the counting array
- */
-void print_counting_array(int *counting_array, int size)
-{
-	int i;
-
-	printf("Counting array: ");
-	for (i = 0; i < size; i++)
-	{
-		printf("%d", counting_array[i]);
-		if (i < size - 1)
-		{
-			printf(", ");
-		}
-	}
-	printf("\n");
 }
